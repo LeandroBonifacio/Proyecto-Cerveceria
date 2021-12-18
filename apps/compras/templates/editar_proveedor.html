@@ -1,0 +1,28 @@
+ {% extends 'base.html' %} {% block title %} Proveedores | editar proveedor {% endblock title %} {% block content %}
+
+
+<div class="container-fluid" id="titulo">
+    <div class="row">
+        <h2>Editar proveedor</h2>
+    </div>
+</div>
+<hr/>
+
+<div class="class=" col-md-6 col-sm-6 col-xs-6 pad-adjust "">
+
+    <form id="form_edicion" action="{% url 'compras:editar_proveedor' object.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="modal-body">
+            {{ form.as_p }}
+        </div>
+        <div class="modal-footer">
+            <button href="{% url 'compras:listar_proveedor' %}" id="aceptar" type="submit" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>
+            <button id="aceptar" type="submit" class="btn btn-secondary btn-lg">Guardar cambios</button>
+        </div>
+
+    </form>
+</div>
+
+
+{% endblock content %}

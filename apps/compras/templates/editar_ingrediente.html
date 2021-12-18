@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Ingrediente | Editar ingrediente {% endblock title %} {% block content %}
+
+<div class="container-fluid" id="titulo">
+    <div class="row">
+        <h2>Editar ingrediente</h2>
+    </div>
+</div>
+<hr/>
+<div class="class=" col-md-6 col-sm-6 col-xs-6 pad-adjust "">
+
+    <form id="form_edicion" action="{% url 'compras:editar_ingrediente' ingrediente.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="modal-body">
+            {{ form.as_p }}
+        </div>
+
+
+        <div class="modal-footer">
+            <button href="{% url 'compras:listar_ingrediente' %}" id="aceptar" type="submit" class="btn btn-secondary btn-lg">Cancelar</button>
+            <button id="aceptar" type="submit" class="btn btn-secondary btn-lg">Aceptar</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

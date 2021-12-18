@@ -1,0 +1,105 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Ventas | agregar venta {% endblock title %} {% block content %}
+
+
+<div class="container-fluid" id="titulo">
+    <div class="row">
+        <form action="{% url 'ventas:listar_venta' %}">
+            <button type="submit" class="btn btn-outline-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+          </svg> Volver</button>
+        </form>
+        <h2>Crear venta</h2>
+    </div>
+</div>
+<hr/>
+<div class="class=" col-md-6 col-sm-6 col-xs-6 pad-adjust>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="fecha">{{form.fecha.label}}</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                        <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                        <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                      </svg></div>
+                </div>
+                {{ form.fecha }}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="ciudad">{{form.descripcion.label}}</label> {{ form.descripcion}}
+        </div>
+        <div class="form-group">
+
+            <label for="telefono">{{form.valor.label}}</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                </div>
+                {{ form.valor}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">{{form.barriles.label}}</label> {{ form.barriles}}
+        </div>
+        <div class="form-group">
+            <label for="calle">{{form.cliente.label}}</label> {{ form.cliente}}
+        </div>
+
+        <div class="form-group">
+            <label for="cuit">{{form.forma_de_pago.label}}</label> {{ form.forma_de_pago}}
+        </div>
+
+        <div class="row">
+            <button id="aceptar" type="submit" class="btn btn-secondary btn-lg">Aceptar</button>
+        </div>
+
+    </form>
+</div>
+
+
+{% endblock content %}{% block extrajs %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $.datepicker.regional['es'] = {
+        closeText: 'Cerrar',
+        prevText: '< Ant',
+        nextText: 'Sig >',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd/mm/yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']);
+    $(function() {
+        $("#fecha").datepicker();
+    });
+</script>
+<script>
+    $(function() {
+        $("#fecha_venta").datepicker({
+
+            dateFormat: 'dd/mm/yy ',
+            defaultDate: new Date(),
+            changeMonth: true,
+            changeYear: true
+
+        });
+    });
+</script>{% endblock extrajs %}
